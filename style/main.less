@@ -1,0 +1,358 @@
+/*--------------------------------------------*/
+/*---> COLORS <-------------------------------*/
+/*--------------------------------------------*/
+
+@mainColor: #2d0a58;
+@mainLight: @mainColor + #222222;
+@mainDark: @mainColor - #222222;
+
+@charcoal: #1a1a1a;
+@csGreen: #6bce2c;
+@softwareBlue: #1D68C0;
+@criticalRed: #C0301D;
+@internetGold: #EBC226;
+@analyticalAqua: #26B6EB;
+
+
+/*--------------------------------------------*/
+/*---> FONTS <--------------------------------*/
+/*--------------------------------------------*/
+
+@textSize: 3vh;
+
+.HeadFont(){
+	font-family: 'Oswald', sans-serif;
+}
+
+.BodyFont(){
+	font-family: 'Lato', sans-serif;
+}
+
+/*--------------------------------------------*/
+/*---> TEXT <---------------------------------*/
+/*--------------------------------------------*/
+
+p, h1, h2, h3, ul, li{
+	.BodyFont();
+	margin: (0.5 * @textSize) auto;
+	color: white;
+}
+
+h1, h2, h3{
+	.HeadFont();
+	text-align: center;
+}
+
+h1{
+	font-size: 1.5 * @textSize;
+	line-height: 1.75 * @textSize;
+}
+
+h2{
+	font-size: 1.25 * @textSize;
+	line-height: 1.5 * @textSize;
+}
+
+h2{
+	font-size: 1.1 * @textSize;
+	line-height: 1.35 * @textSize;
+}
+
+p{
+	font-size: 1.0 * @textSize;
+	line-height: 1.25 * @textSize;
+	text-align: center;
+}
+
+ul{
+	width: 90%;
+	margin: auto 5%;
+}
+
+li{
+	font-size: 1.0 * @textSize;
+	line-height: 1.25 * @textSize;
+	list-style: disc;
+	margin: (0.15 * @textSize) auto;
+}
+
+a{
+
+	text-decoration: none;
+	font-weight: bold;
+	color: @charcoal;
+
+	&:hover{
+		color: white;
+	}
+
+	.AnimateAll();
+
+}
+
+/*--------------------------------------------*/
+/*---> BODY <---------------------------------*/
+/*--------------------------------------------*/
+
+html{
+	background: white;
+	//Default Text Styles
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	.BodyFont();
+	font-size: @textSize;
+	color: @charcoal;
+	overflow-x: hidden;
+}
+
+body{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
+/*--------------------------------------------*/
+/*---> STRUCTURE <----------------------------*/
+/*--------------------------------------------*/
+
+canvas{
+	display: block;
+	margin: 0 auto;
+}
+
+.HexBackground(@darkHex) when (@darkHex){
+	background-image: url('img/charcoal-trans-hex.png');
+	background-size: 200px;
+}
+
+.HexBackground(@darkHex) when not (@darkHex){
+	background-image: url('img/white-trans-hex.png');
+	background-size: 200px;
+}
+
+.TextShadow(){
+	text-shadow: 0 0 20px rgba(0, 0, 0, 0.95);
+}
+
+.ProcessingConsole(){
+
+	@-webkit-keyframes processingConsole{
+		0%{
+			opacity: 1.0
+		}
+		50%{
+			opacity: 0.05;
+		}
+		100%{
+			opacity: 1.0;
+		}
+	}
+
+	animation: processingConsole 2s linear infinite;
+	-webkit-animation: processingConsole 2s linear infinite;
+
+}
+
+.console-char{
+	font-weight: normal;
+	opacity: 0.5;
+	.ProcessingConsole();
+}
+
+
+body#index{
+
+	section{
+
+		width: 90%;
+		padding: 5%;
+		margin-top: -1%; //Dubious margin, there, Vinesh
+		
+		p, h1, h2, h3, ul, li{
+			text-align: left;
+		}
+
+		p{
+			line-height: 1.5 * @textSize;
+		}
+
+	}
+
+	section:nth-child(1){
+
+		img{
+			width: 25%;
+			margin: 10.5% 5%;
+			//width: 56%;
+			position: absolute;
+		}
+
+		div.ghost-center{
+
+			background: transparent;
+			position: absolute;
+			width: 100%;
+			height: 25%;
+			margin: 10.5% auto;
+			margin-right: 0;
+
+			div#entry-message{
+
+				background: transparent;
+				position: absolute;
+				width: 56%;
+				margin: 0 35%;
+				margin-right: 0;
+				vertical-align: middle;
+
+				h1, p{
+					.TextShadow();
+				}
+
+				h1{
+					color: @csGreen;
+					border-bottom: 3px solid @charcoal;
+				}
+
+				p#landing-icons{
+					
+					i{
+						font-size: 1.5 * @textSize;
+						margin: 1%;
+					}
+
+					a{
+						color: @csGreen;
+						&:hover{
+							color: white;
+						}
+					}
+
+				}
+
+			}
+
+		}
+
+		div.video-wrapper{
+
+			opacity: 0.5;
+			position: relative;
+			z-index: -5;
+
+			video{
+				width: 110%;
+				margin: -5%;
+			}
+
+		}
+
+	}
+
+	div.hex-row{
+		.HexBackground(false);
+		width: 100%;
+		padding: 2.5% 5%;
+		margin: -5%;
+		margin-top: -5.5%;
+		margin-bottom: 0%;
+	}
+
+	section:nth-child(2){
+		background-color: @csGreen;
+	}
+
+	section:nth-child(3){
+		background-color: @criticalRed;
+	}
+
+	section:nth-child(4){
+		background-color: @softwareBlue;
+	}
+
+	section:nth-child(5){
+		background-color: @charcoal;
+		div.hex-row{
+			.HexBackground(true);
+		}
+		a{
+			color: @softwareBlue;
+		}
+	}
+
+	section:nth-child(6){
+		background-color: @internetGold;
+		width: 100%;
+		margin-top: 5%;
+		padding: 0;
+		p{
+			text-align: center;
+			color: @charcoal;
+		}
+	}
+
+}
+
+/*--------------------------------------------*/
+/*---> HEADER & FOOTER <----------------------*/
+/*--------------------------------------------*/
+
+
+
+/*--------------------------------------------*/
+/*---> FORM <----------------------------------*/
+/*--------------------------------------------*/
+
+input, button, select{
+	outline: none;
+	border: none;
+}
+
+/*--------------------------------------------*/
+/*---> SCROLLBAR <----------------------------*/
+/*--------------------------------------------*/
+
+@scrollBar: rgba(255, 255, 255, 1.0);
+@scrollBarBack: rgba(0, 0, 0, 0.5);
+
+::-webkit-scrollbar{
+	width: 10px;
+	height: 10px;
+	background: @scrollBarBack;
+	z-index: 50;
+}
+
+::-webkit-scrollbar-button{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-track-piece{
+	background: @scrollBarBack;
+}
+
+::-webkit-scrollbar-thumb{
+	background: @scrollBar;
+	//border-radius: 5px;
+	position: absolute;
+	margin-left: -10px;
+}
+
+::-webkit-scrollbar-corner{
+	width: 10px;
+	height: 10px;
+	background: @scrollBarBack;
+}
+
+::-webkit-resizer{
+	background: @scrollBarBack;
+}
